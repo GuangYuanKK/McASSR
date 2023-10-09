@@ -1,4 +1,4 @@
-# modified from: https://github.com/yinboc/lte
+# modified from: https://github.com/jaewon-lee-b/lte
 
 import argparse
 import os

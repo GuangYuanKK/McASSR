@@ -1,0 +1,66 @@
+train_dataset:
+  dataset:
+    name: mc-image-folders
+    args:
+      root_path_1: /disk1/lgy/MC_ArbSR/mcasr/data/mc_brain/T2/train
+      root_path_2: /disk1/lgy/MC_ArbSR/mcasr/data/mc_brain/T1/train
+      repeat: 10
+      cache: in_memory
+  wrapper:
+    name: sr-implicit-downsampled
+    args:
+      inp_size: 64
+      scale_max: 4
+      augment: true
+      sample_q: 4096
+  batch_size: 8
+
+val_dataset:
+  dataset:
+    name: mc-image-folders
+    args:
+      root_path_1: /disk1/lgy/MC_ArbSR/mcasr/data/mc_brain/T2/valid
+      root_path_2: /disk1/lgy/MC_ArbSR/mcasr/data/mc_brain/T1/valid
+      first_k: 10
+      repeat: 160
+      cache: in_memory
+  wrapper:
+    name: sr-implicit-downsampled
+    args:
+      inp_size: 64
+      scale_max: 4
+      sample_q: 4096
+  batch_size: 8
+
+data_norm:
+  inp: {sub: [0.5], div: [0.5]}
+  ref: {sub: [0.5], div: [0.5]}
+  gt: {sub: [0.5], div: [0.5]}
+
+model:
+  name: lte
+  args:
+    encoder_spec:
+      name: cat
+      args:
+        no_upsampling: true
+    imnet_spec:
+      name: mlp
+      args:
+        out_dim: 3
+        hidden_list: [256, 256, 256]
+    hidden_dim: 256
+
+optimizer:
+  name: adam
+  args:
+    lr: 2.e-4
+epoch_max: 1000
+multi_step_lr:
+  milestones: [500, 800, 900, 950]
+  gamma: 0.5
+
+epoch_val: 1
+epoch_save: 100
+
+resume: ~

@@ -41,7 +41,7 @@ model:
   name: lte
   args:
     encoder_spec:
-      name: cat
+      name: rct
       args:
         no_upsampling: true
     imnet_spec:

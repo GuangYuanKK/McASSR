@@ -38,7 +38,7 @@ data_norm:
   gt: {sub: [0.5], div: [0.5]}
 
 model:
-  name: lte
+  name: mc_arsr
   args:
     encoder_spec:
       name: rct

@@ -2,3 +2,4 @@
 
 This code is built on  [LTE](https://github.com/jaewon-lee-b/lte) and [CAT](https://github.com/zhengchen1999/CAT). Thank the authors for sharing their codes!
 
+Train: python train.py --config configs/train_mcsr-brain.yaml
